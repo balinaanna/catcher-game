@@ -38,6 +38,8 @@ function useAsset({assetValue, deleteAsset, id, ref, viewport}) {
     () => {
       const moveInterval = setInterval(
         () => {
+          if (!ref.current) { return; }
+
           const {x, y, width, height} = ref.current.getBoundingClientRect();
           const asset_coords = {
             x1: x - viewport.left,

@@ -16,6 +16,8 @@ function Game() {
 
   const updateViewport = useCallback(
     () => {
+      if (!appRef.current) { return; }
+
       const {height, width, left, top} = appRef.current.getBoundingClientRect();
 
       setViewport(
@@ -28,6 +30,8 @@ function Game() {
   useEffect(updateViewport, []);
 
   const handleMouseMove = useCallback((event) => {
+    if (!appRef.current) { return; }
+
     setUserX(event.clientX - appRef.current.getBoundingClientRect().left);
   }, [appRef, setUserX]);
 
