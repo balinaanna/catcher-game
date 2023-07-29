@@ -13,19 +13,13 @@ Clone the repo.
 cd catcher-game
 npm i
 ```
-##### Create a Postgres database
+##### Configure a Postgres database
+Configure variables in `.env` to support PG connection.
+
+Then create a database.
 ```sh
 CREATE DATABASE catcher_development;
 ```
-Your Postgres configuration should look like this:
-
-> user: postgres
-> 
-> password: password
->
-> host: localhost
->
-> port: 5432
 
 ##### Install sequelize-cli globally to be able to run our DB migrations and seeds
 ```sh
