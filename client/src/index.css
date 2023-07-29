@@ -1,0 +1,176 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.asset-sample {
+  width: 2rem;
+  height: 2rem;
+}
+
+.game-container {
+  position: fixed;
+  height: 100%;
+  width: 100%!important;
+  top: 0;
+  left: 0;
+}
+
+.game-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/bg1.png');
+  background-color: #e2e2e2;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.catcher {
+  position: absolute;
+  background-image: url('assets/boat.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1000;
+
+  animation: catcherFloat 3s linear infinite;
+}
+
+.asset-container {
+  position: absolute;
+  height: 100%;
+  width: 0;
+  top: 0;
+  z-index: 1000;
+
+  animation: assetFall 4s linear forwards;
+}
+
+.asset {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  animation: asssetAppear 0.5s forwards;
+}
+
+.asset.small {
+  width: 4rem;
+  height: 4rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.asset.disappear {
+  animation: asssetDisappear 0.3s forwards;
+}
+
+.asset.grimalda {
+  background-image: url('assets/e1.png');
+}
+.asset.amethyst {
+  background-image: url('assets/e2.png');
+}
+.asset.ruby {
+  background-image: url('assets/p1.png');
+}
+.asset.rudolph {
+  background-image: url('assets/p2.png');
+}
+.asset.columbus {
+  background-image: url('assets/p3.png');
+}
+.asset.pippin {
+  background-image: url('assets/p4.png');
+}
+
+.info-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.info-panel .right {
+  float: right;
+}
+.info-panel .score,
+.info-panel .countdown {
+  padding: 1rem 2rem;
+}
+
+.gamestart-countdown {
+  font-size: 10rem;
+  display: block;
+  text-align: center;
+  animation: gamestartCountdown 1s ease-in-out infinite;
+}
+
+
+@keyframes gamestartCountdown {
+	0%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+	}
+}
+
+@keyframes catcherFloat {
+	0%{
+		transform: rotate(0);
+	}
+	50%{
+		transform: rotate(-5deg);
+	}
+	100%{
+		transform: rotate(0);
+	}
+}
+
+@keyframes assetFall {
+  0%{
+    transform: translateY(0%), scale(0);
+  }
+  100%{
+    transform: translateY(100%);
+  }
+}
+
+@keyframes asssetAppear {
+  0%{
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100%{
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes asssetDisappear {
+  0%{
+    transform: scale(1);
+    opacity: 1;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    transform: scale(0.3);
+    opacity: 0;
+  }
+}
