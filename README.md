@@ -1,7 +1,7 @@
 # catcher-game
 This is a simple Catcher game application that includes a leaderboard of top players.
 
-*ExpressJS, ReactJS*
+*ExpressJS, ReactJS, PostgreSQL*
 
 ## Start the app
 
