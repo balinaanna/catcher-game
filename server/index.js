@@ -1,6 +1,9 @@
-const express = require("express");
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const express = require("express"),
+  bodyParser = require("body-parser"),
+  swaggerJsdoc = require("swagger-jsdoc"),
+  swaggerUi = require("swagger-ui-express"),
+  cors = require('cors');
+
 const db = require('./queries');
 
 const PORT = process.env.PORT || 3001;
@@ -19,6 +22,31 @@ app.use(cors({
 
 app.get('/users', db.getUsers);
 app.post('/users', db.createUser);
+
+const options = {
+  definition: {
+    openapi: "3.1.0",
+    info: {
+      title: "Catcher game app API with Swagger",
+      version: "0.1.0",
+      description:
+        "This is a simple CRUD API application made with Express and documented with Swagger",
+    },
+    servers: [
+      {
+        url: "http://localhost:3001",
+      },
+    ],
+  },
+  apis: ["./server/routes/*.js"],
+};
+
+const specs = swaggerJsdoc(options);
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs)
+);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

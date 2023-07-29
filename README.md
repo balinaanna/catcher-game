@@ -52,3 +52,7 @@ npm i
 npm  start
 ```
 The frontend app will run on [`http://localhost:3000/`](http://localhost:3000/)
+
+## API doc
+
+Check [`http://localhost:3001/api-docs`](http://localhost:3001/api-docs) for generated Swagger api documentation.
