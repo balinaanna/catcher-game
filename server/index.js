@@ -3,11 +3,15 @@ const express = require("express"),
   swaggerJsdoc = require("swagger-jsdoc"),
   swaggerUi = require("swagger-ui-express"),
   cors = require('cors'),
-  path = require('path');
+  path = require('path'),
+  dotenv = require('dotenv');
 
+dotenv.config({ path: './.env' });
 const db = require('./queries');
 
 const PORT = process.env.PORT || 3001;
+
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 const app = express();
 
@@ -21,7 +25,7 @@ app.use(
   })
 );
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: FRONTEND_URL
 }));
 
 app.get('/users', db.getUsers);
