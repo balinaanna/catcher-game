@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, Icon, Input, Modal, Statistic } from 'semantic-ui-react';
 import { useGame } from '../GameContext';
+import { REACT_APP_API_URL } from '../constants/game';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -57,7 +58,7 @@ function GameOverModal() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         };
-        await fetch(`http://localhost:3001/users`, requestOptions);
+        await fetch(`${REACT_APP_API_URL}/users`, requestOptions);
         
         closeModal();
         

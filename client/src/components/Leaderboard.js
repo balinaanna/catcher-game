@@ -4,9 +4,10 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { Button, Container, Header, Segment, Table } from 'semantic-ui-react';
+import { REACT_APP_API_URL } from '../constants/game';
 
 export async function loader({ params }) {
-  return fetch("http://localhost:3001/users?order_by=score&order=DESC&limit=100");
+  return fetch(`${REACT_APP_API_URL}/users?order_by=score&order=DESC&limit=100`);
 }
 
 function Leaderboard() {
@@ -42,7 +43,7 @@ function Leaderboard() {
             </Table.Header>
 
             <Table.Body>
-              {users.map((user, i) => (
+              { users?.map && users.map((user, i) => (
                 <Table.Row key={user.id}>
                   <Table.Cell collapsing>
                     {i + 1}
