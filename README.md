@@ -3,6 +3,8 @@ This is a simple Catcher game application that includes a leaderboard of top pla
 
 *ExpressJS, ReactJS, PostgreSQL*
 
+### [Play Online](https://catcher-game-25556b0b3db6.herokuapp.com/) on desktop or mobile!
+
 ## Start the app
 
 Clone the repo.
