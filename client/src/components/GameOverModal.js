@@ -78,6 +78,7 @@ function GameOverModal() {
 
   return (
     <Modal
+    closeOnDimmerClick={false}
     open={open}
     onClose={closeModal}
     size="tiny"
