@@ -4,7 +4,9 @@ const express = require("express"),
   swaggerUi = require("swagger-ui-express"),
   cors = require('cors'),
   path = require('path'),
-  dotenv = require('dotenv');
+  dotenv = require('dotenv'),
+  socketIo = require('socket.io'),
+  http = require('http');
 
 dotenv.config({ path: './.env' });
 const db = require('./queries');
@@ -14,6 +16,14 @@ const PORT = process.env.PORT || 3001;
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
 const app = express();
+
+const server = http.createServer(app);
+
+const io = socketIo(server, {
+  cors: {
+    origin: FRONTEND_URL
+  }
+});
 
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
@@ -29,7 +39,14 @@ app.use(cors({
 }));
 
 app.get('/users', db.getUsers);
-app.post('/users', db.createUser);
+
+app.post('/users', (request, response) => {
+  const onCreate = (key, val) => {
+    io.to('game-room').emit(key, val);
+  }
+
+  db.createUser(request, response, onCreate);
+});
 
 const options = {
   definition: {
@@ -61,6 +78,17 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
+io.on('connection', (socket) => {
+  console.log('client connected: ',socket.id);
+
+  socket.join('game-room');
+
+  socket.on('disconnect', (reason) => {
+    console.log(reason);
+  })
+});
+
+server.listen(PORT, err => {
+  if(err) console.log(err);
+  console.log('Server running on Port ', PORT);
 });

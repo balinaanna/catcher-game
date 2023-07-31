@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   useLoaderData,
   useNavigate,
 } from "react-router-dom";
+import { io } from 'socket.io-client';
 import { Button, Container, Header, Segment, Table } from 'semantic-ui-react';
 import { REACT_APP_API_URL } from '../constants/game';
 
@@ -12,7 +13,28 @@ export async function loader({ params }) {
 
 function Leaderboard() {
   const navigate = useNavigate();
-  const users = useLoaderData();
+  const [users, setUsers] = useState(useLoaderData());
+
+  const handleUserCreated = useCallback(
+    (data) => {
+        setUsers(users => {
+          users.push(data);
+
+          return users.sort((a, b) => b.score - a.score).slice(0, 100);
+        });
+    },
+    [setUsers]
+  );
+
+  useEffect(() => {
+    const socket = io(REACT_APP_API_URL);
+    socket.on("connect_error", () => {
+      setTimeout(() => socket.connect(), 5000);
+    });
+    socket.on("user_created", (data) => {
+      handleUserCreated(data);
+    });
+  }, []);
 
   return (
     <Container>

@@ -21,13 +21,15 @@ const getUsers = (request, response) => {
   })
 };
 
-const createUser = (request, response) => {
+const createUser = (request, response, onCreate) => {
   const { name, score } = request.body;
 
   pool.query('INSERT INTO users (name, score) VALUES ($1, $2) RETURNING *', [name, score], (error, results) => {
     if (error) {
       throw error;
     }
+
+    onCreate('user_created', results.rows[0]);
     response.status(201).send(results.rows[0]);
   })
 };
