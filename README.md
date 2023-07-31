@@ -45,10 +45,17 @@ The server app will run on [`http://localhost:3001/`](http://localhost:3001/)
 ```sh
 cd client
 npm i
-npm  start
+npm start
 ```
 The frontend app will run on [`http://localhost:3000/`](http://localhost:3000/)
 
 ## API doc
 
-Check [`http://localhost:3001/api-docs`](http://localhost:3001/api-docs) for generated Swagger api documentation.
+Check [`http://localhost:3001/api-docs`](http://localhost:3001/api-docs) or this [Heroku link](https://catcher-game-25556b0b3db6.herokuapp.com/api-docs) for generated Swagger api documentation.
+
+## Future nice-to-have’s
+
+* Add user authentication so that the score can be updated for the user (right now it creates a new record each time user saves their * result).
+* Typescriptify js code.
+* Work on UI design.
+* Add more animations to improve user feedback.
