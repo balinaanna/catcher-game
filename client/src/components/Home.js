@@ -43,7 +43,7 @@ function Home() {
               className="ui button huge green fluid"
               >
               <i className="gamepad icon"></i>
-              Play Now
+              Start Game
             </Link>
           </Grid.Column>
 
