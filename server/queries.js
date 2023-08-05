@@ -1,12 +1,6 @@
 const Pool = require('pg').Pool;
 
-const pool = new Pool({
-  user: process.env.PG_USERNAME,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DB_NAME,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
-});
+const pool = new Pool({connectionString: process.env.DATABASE_URL});
 
 const getUsers = (request, response) => {
   const limit = request.query.limit ? request.query.limit : 20;
