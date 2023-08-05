@@ -50,11 +50,11 @@
  *           default: 'score'
  *         description: The user property to order the results list by
  *       - in: query
- *         name: order
+ *         name: desc
  *         schema:
  *           type: string
- *           default: 'desc'
- *         description: The keyword that specifies the ascending or descending order
+ *           default: 'true'
+ *         description: The keyword that specifies the descending order
  *       - in: query
  *         name: limit
  *         schema:

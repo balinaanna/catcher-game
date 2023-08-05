@@ -8,7 +8,7 @@ import { Button, Container, Header, Segment, Table } from 'semantic-ui-react';
 import { REACT_APP_API_URL } from '../constants/game';
 
 export async function loader({ params }) {
-  return fetch(`${REACT_APP_API_URL}/users?order_by=score&order=DESC&limit=100`);
+  return fetch(`${REACT_APP_API_URL}/users?order_by=score&desc=true&limit=100`);
 }
 
 function Leaderboard() {

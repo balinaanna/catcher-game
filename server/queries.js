@@ -4,10 +4,17 @@ const pool = new Pool({connectionString: process.env.DATABASE_URL});
 
 const getUsers = (request, response) => {
   const limit = request.query.limit ? request.query.limit : 20;
-  const order_by = request.query.order_by ? request.query.order_by : 'id';
-  const order = request.query.order ? request.query.order : 'ASC';
+  const orderBy = request.query.order_by ? request.query.order_by : 'id';
+  const orderDesc = request.query.desc === 'true' ? 'DESC' : '';
 
-  pool.query(`SELECT * FROM users ORDER BY ${order_by} ${order} LIMIT ${limit}`, (error, results) => {
+  pool.query(`SELECT * FROM users\
+    ORDER BY\
+      CASE WHEN $1 = 'score' THEN score END ${orderDesc},\
+      CASE WHEN $1 = 'name' THEN name END ${orderDesc},\
+      CASE WHEN $1 = 'created_at' THEN created_at END ${orderDesc},\
+      CASE WHEN $1 = 'updated_at' THEN updated_at END ${orderDesc},\
+      id\
+    LIMIT $2`, [orderBy, limit], (error, results) => {
     if (error) {
       throw error;
     }
